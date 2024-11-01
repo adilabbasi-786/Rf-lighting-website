@@ -6,12 +6,7 @@ let url =
   "https://hooks.slack.com/services/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";
 
 export default function ContactUs() {
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { reset, register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     const myHeaders = new Headers();

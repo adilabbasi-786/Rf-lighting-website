@@ -7,8 +7,6 @@ import Link from "next/link";
 export default function Header() {
   const router = useRouter();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-  const [nestedOpen, setNestedOpen] = useState("");
-  const [nested1Open, setNested1Open] = useState("");
 
   const navigateToSection = (sectionID) => {
     if (router.pathname !== "/") {
@@ -49,12 +47,12 @@ export default function Header() {
 
       <div className="branding d-flex align-items-center">
         <div className="container position-relative d-flex align-items-center justify-content-between">
-          <a href="/" className="logo d-flex align-items-center">
+          <Link href="/" className="logo d-flex align-items-center">
             <img
               src={`${window.location.protocol}//${window.location.host}/logo.png`}
               alt="Logo"
             />
-          </a>
+          </Link>
 
           <nav id="navmenu" className="navmenu">
             <ul>

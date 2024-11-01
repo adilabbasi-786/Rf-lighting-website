@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 import details from "../data.json";
+import Link from "next/link";
 
 export default function ProductDetail() {
   const router = useRouter();
@@ -18,7 +19,9 @@ export default function ProductDetail() {
           <nav class="breadcrumbs">
             <ol>
               <li>
-                <a href="/">{details?.lang === "EN" ? "Home" : "المنزل"}</a>
+                <Link href="/">
+                  {details?.lang === "EN" ? "Home" : "المنزل"}
+                </Link>
               </li>
               <li class="current">
                 {details?.lang === "EN" ? product?.name : product?.nameAR}
@@ -47,7 +50,10 @@ export default function ProductDetail() {
               data-aos-delay="200"
             >
               {product?.images?.map((eachImg) => (
-                <div class="col-lg-2 col-md-2 portfolio-item isotope-item filter-app">
+                <div
+                  class="col-lg-2 col-md-2 portfolio-item isotope-item filter-app"
+                  key={eachImg}
+                >
                   <div class="portfolio-content h-100">
                     <img
                       style={{ height: "200px" }}

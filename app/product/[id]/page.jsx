@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"; // Handles 404s in app router
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import details from "../../data.json";
+import Link from "next/link";
 
 export default function ProductDetail({ params }) {
   const { id } = params;
@@ -20,7 +21,7 @@ export default function ProductDetail({ params }) {
           <nav className="breadcrumbs">
             <ol>
               <li>
-                <a href="/">Home</a>
+                <Link href="/">Home</Link>
               </li>
               <li className="current">{product.name}</li>
             </ol>
