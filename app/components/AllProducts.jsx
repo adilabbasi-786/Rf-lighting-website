@@ -1,8 +1,17 @@
+"use client";
 import Link from "next/link";
 import data from "../data.json"; // Adjust path if necessary
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const AllProducts = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Ensures client-side rendering
+  }, []);
+
+  if (!isClient) return null; // Skip rendering on the server
+
   return (
     <div className="container mx-auto py-6">
       <h2 className="text-2xl font-bold mb-4">All Products</h2>
