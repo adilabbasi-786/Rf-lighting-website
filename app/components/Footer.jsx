@@ -94,7 +94,7 @@ export default function Footer() {
           >
             FTS Tech
           </a>{" "}
-          +92 310 5860079
+          +92 318 5669303
         </p>
       </div>
     </footer>
