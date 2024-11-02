@@ -1,10 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import details from "../data.json";
 import Link from "next/link";
 
 export default function Header() {
+  const [isClient, setIsClient] = useState(false);
+  const [logoSrc, setLogoSrc] = useState("");
   const router = useRouter();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
@@ -25,10 +27,23 @@ export default function Header() {
     }
   };
 
+  useEffect(() => {
+    setIsClient(true); // Ensures client-side rendering
+
+    // Only set logoSrc on the client side
+    if (typeof window !== "undefined") {
+      setLogoSrc(
+        `${window.location.protocol}//${window.location.host}/logo.png`
+      );
+    }
+  }, []);
+
+  if (!isClient) return null; // Skip rendering on the server
+
   return (
     <header
       id="header"
-      className={` header sticky-top ${
+      className={`header sticky-top ${
         openMobileMenu ? "mobile-nav-active" : ""
       }`}
     >
@@ -48,10 +63,7 @@ export default function Header() {
       <div className="branding d-flex align-items-center">
         <div className="container position-relative d-flex align-items-center justify-content-between">
           <Link href="/" className="logo d-flex align-items-center">
-            <img
-              src={`${window.location.protocol}//${window.location.host}/logo.png`}
-              alt="Logo"
-            />
+            <img src={logoSrc} alt="Logo" />
           </Link>
 
           <nav id="navmenu" className="navmenu">
@@ -82,7 +94,6 @@ export default function Header() {
                   )}
                 </li>
               ))}
-
               <li>
                 <a
                   href="#about-us"

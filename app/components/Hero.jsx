@@ -1,13 +1,27 @@
-// Hero.js
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [slidesPerView, setSlidesPerView] = useState(8); // default value for larger screens
+
+  useEffect(() => {
+    // Set initial slides per view based on screen width
+    const handleResize = () => {
+      setSlidesPerView(window.innerWidth < 700 ? 3 : 8);
+    };
+
+    handleResize(); // Set the initial value
+    window.addEventListener("resize", handleResize); // Update on window resize
+
+    return () => window.removeEventListener("resize", handleResize); // Cleanup listener
+  }, []);
+
   return (
     <>
-      <section id="hero" className="hero section light-background ">
+      <section id="hero" className="hero section light-background">
         <Swiper
           loop
           autoplay={{
@@ -21,22 +35,13 @@ export default function Hero() {
           style={{ height: "inherit" }}
         >
           <SwiperSlide>
-            <img
-              src={`${window.location.protocol}//${window.location.host}/banner1.png`}
-              alt="Banner 1"
-            />
+            <img src="/banner1.png" alt="Banner 1" />
           </SwiperSlide>
           <SwiperSlide>
-            <img
-              src={`${window.location.protocol}//${window.location.host}/banner2.png`}
-              alt="Banner 2"
-            />
+            <img src="/banner2.png" alt="Banner 2" />
           </SwiperSlide>
           <SwiperSlide>
-            <img
-              src={`${window.location.protocol}//${window.location.host}/banner1.png`}
-              alt="Banner 3"
-            />
+            <img src="/banner1.png" alt="Banner 3" />
           </SwiperSlide>
         </Swiper>
       </section>
@@ -54,7 +59,7 @@ export default function Hero() {
           }}
           navigation={true}
           modules={[Navigation, Autoplay]}
-          slidesPerView={window.innerWidth < 700 ? 3 : 8}
+          slidesPerView={slidesPerView} // Using dynamic slidesPerView based on window width
           spaceBetween={20}
           className="mySwiper"
           style={{ height: "100px" }}

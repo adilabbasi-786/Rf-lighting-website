@@ -57,7 +57,7 @@ export default function ProductDetail() {
                   <div class="portfolio-content h-100">
                     <img
                       style={{ height: "200px" }}
-                      src={`${window.location.protocol}//${window.location.host}/${eachImg}`}
+                      // src={`${window.location.protocol}//${window.location.host}/${eachImg}`}
                       class="img-fluid"
                       alt=""
                     />
