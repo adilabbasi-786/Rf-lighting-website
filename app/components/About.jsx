@@ -7,7 +7,7 @@ export default function About() {
     <>
       <section
         id="why-us"
-        style={{ margin: "2%" }}
+        style={{ margin: "3%" }}
         className="why-us section light-background"
       >
         <div className="container">
@@ -32,7 +32,7 @@ export default function About() {
       </section>
       <section
         id="why-us"
-        style={{ margin: "2%" }}
+        style={{ margin: "3%", height: "120px" }}
         className="why-us section light-background"
       >
         <div className="container">
@@ -61,7 +61,7 @@ export default function About() {
 
       <section
         id="about-us"
-        style={{ margin: "2%" }}
+        style={{ margin: "3%", height: "120px" }}
         className="why-us section light-background"
       >
         <div className="container">
@@ -87,7 +87,7 @@ export default function About() {
       </section>
       <section
         id="about-us"
-        style={{ margin: "2%" }}
+        style={{ margin: "3%", height: "120px" }}
         className="why-us section light-background"
       >
         <div className="container">
