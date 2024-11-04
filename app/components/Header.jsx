@@ -41,83 +41,93 @@ export default function Header() {
   if (!isClient) return null; // Skip rendering on the server
 
   return (
-    <header
-      id="header"
-      className={`header sticky-top ${
-        openMobileMenu ? "mobile-nav-active" : ""
-      }`}
-    >
-      <div className="topbar d-flex align-items-center">
-        <div className="container d-flex justify-content-center justify-content-md-between">
-          <div className="contact-info d-flex align-items-center">
-            <i className="bi bi-envelope d-flex align-items-center">
-              <a href={`mailto:${details?.email}`}>{details?.email}</a>
-            </i>
-            <i className="bi bi-phone d-flex align-items-center ms-4">
-              <span>{details?.phone}</span>
-            </i>
+    <>
+      <header
+        id="header"
+        className={`header sticky-top ${
+          openMobileMenu ? "mobile-nav-active" : ""
+        }`}
+      >
+        <div className="topbar d-flex align-items-center">
+          <div className="container d-flex justify-content-center justify-content-md-between">
+            <div className="contact-info d-flex align-items-center">
+              <i className="bi bi-envelope d-flex align-items-center">
+                <a href={`mailto:${details?.email}`}>{details?.email}</a>
+              </i>
+              <i className="bi bi-phone d-flex align-items-center ms-4">
+                <span>{details?.phone}</span>
+              </i>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="branding d-flex align-items-center">
-        <div className="container position-relative d-flex align-items-center justify-content-between">
-          <Link href="/" className="logo d-flex align-items-center">
-            <img src={logoSrc} alt="Logo" />
-          </Link>
+        <div className="branding d-flex align-items-center">
+          <div className="container position-relative d-flex align-items-center justify-content-between">
+            <Link href="/" className="logo d-flex align-items-center">
+              <img src={logoSrc} alt="Logo" />
+            </Link>
 
-          <nav id="navmenu" className="navmenu">
-            <ul>
-              {details.navbar.map((each) => (
-                <li className="dropdown" key={each.name}>
-                  {each.name === "Home" ? (
-                    <Link href="/">
-                      <span>{each.name}</span>
-                    </Link>
-                  ) : each.name === "All Products" ? (
-                    <Link href="/allproducts">
-                      <span>{each.name}</span>
-                    </Link>
-                  ) : (
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setNestedOpen(each);
-                      }}
-                    >
-                      <span>{each.name}</span>
-                      {each?.child && each?.child?.length > 0 && (
-                        <i className="bi bi-chevron-down toggle-dropdown"></i>
-                      )}
-                    </a>
-                  )}
+            <nav id="navmenu" className="navmenu">
+              <ul>
+                {details.navbar.map((each) => (
+                  <li className="dropdown" key={each.name}>
+                    {each.name === "Home" ? (
+                      <Link href="/">
+                        <span>{each.name}</span>
+                      </Link>
+                    ) : each.name === "All Products" ? (
+                      <Link href="/allproducts">
+                        <span>{each.name}</span>
+                      </Link>
+                    ) : each.name === "SMD Lights" ? (
+                      <Link href="/smdlights">
+                        <span>{each.name}</span>
+                      </Link>
+                    ) : each.name === "Cables" ? (
+                      <Link href="/cables">
+                        <span>{each.name}</span>
+                      </Link>
+                    ) : (
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setNestedOpen(each);
+                        }}
+                      >
+                        <span>{each.name}</span>
+                        {each?.child && each?.child?.length > 0 && (
+                          <i className="bi bi-chevron-down toggle-dropdown"></i>
+                        )}
+                      </a>
+                    )}
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href="#about-us"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateToSection("about-us");
+                    }}
+                  >
+                    About Us
+                  </a>
                 </li>
-              ))}
-              <li>
-                <a
-                  href="#about-us"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateToSection("about-us");
-                  }}
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#contact">Contact Us</a>
-              </li>
-            </ul>
-            <i
-              className={`mobile-nav-toggle d-xl-none bi bi-${
-                openMobileMenu ? "x" : "list"
-              }`}
-              onClick={() => setOpenMobileMenu((prev) => !prev)}
-            ></i>
-          </nav>
+                <li>
+                  <a href="#contact">Contact Us</a>
+                </li>
+              </ul>
+              <i
+                className={`mobile-nav-toggle d-xl-none bi bi-${
+                  openMobileMenu ? "x" : "list"
+                }`}
+                onClick={() => setOpenMobileMenu((prev) => !prev)}
+              ></i>
+            </nav>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
