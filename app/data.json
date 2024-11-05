@@ -8,19 +8,27 @@
       "name": "Home"
     },
     {
-      "name": "SMD Lights"
+      "name": "Lights",
+      "child": [
+        { "name": "SMD Lights", "url": "/smdlights" },
+        { "name": "LED Lights", "url": "/ledlights" }
+      ]
     },
-    {
-      "name": "LED Lights"
-    },
-    {
-      "name": "All Products"
-    },
+
     {
       "name": "Cables"
     },
     {
       "name": "Fans"
+    },
+    {
+      "name": "Solar Solutions"
+    },
+    {
+      "name": "Switch And Sockets"
+    },
+    {
+      "name": "Submeters"
     }
   ],
   "product": {

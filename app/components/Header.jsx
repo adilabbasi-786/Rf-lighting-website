@@ -10,27 +10,9 @@ export default function Header() {
   const router = useRouter();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
-  const navigateToSection = (sectionID) => {
-    if (router.pathname !== "/") {
-      router.push(`/#${sectionID}`);
-      setTimeout(() => {
-        const section = document.getElementById(sectionID);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 200);
-    } else {
-      const section = document.getElementById(sectionID);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   useEffect(() => {
     setIsClient(true); // Ensures client-side rendering
 
-    // Only set logoSrc on the client side
     if (typeof window !== "undefined") {
       setLogoSrc(
         `${window.location.protocol}//${window.location.host}/logo.png`
@@ -70,50 +52,41 @@ export default function Header() {
             <nav id="navmenu" className="navmenu">
               <ul>
                 {details.navbar.map((each) => (
-                  <li className="dropdown" key={each.name}>
-                    {each.name === "Home" ? (
-                      <Link href="/">
+                  <li
+                    className={`dropdown ${each.child ? "has-children" : ""}`}
+                    key={each.name}
+                  >
+                    {each.child ? (
+                      <a href="#">
                         <span>{each.name}</span>
-                      </Link>
-                    ) : each.name === "All Products" ? (
-                      <Link href="/allproducts">
-                        <span>{each.name}</span>
-                      </Link>
-                    ) : each.name === "SMD Lights" ? (
-                      <Link href="/smdlights">
-                        <span>{each.name}</span>
-                      </Link>
-                    ) : each.name === "Cables" ? (
-                      <Link href="/cables">
-                        <span>{each.name}</span>
-                      </Link>
+                        <i className="bi bi-chevron-down toggle-dropdown"></i>
+                      </a>
                     ) : (
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setNestedOpen(each);
-                        }}
+                      <Link
+                        href={
+                          each.name === "Home"
+                            ? "/"
+                            : `/${each.name.toLowerCase().replace(" ", "")}`
+                        }
                       >
                         <span>{each.name}</span>
-                        {each?.child && each?.child?.length > 0 && (
-                          <i className="bi bi-chevron-down toggle-dropdown"></i>
-                        )}
-                      </a>
+                      </Link>
+                    )}
+
+                    {/* Render children if exist */}
+                    {each.child && (
+                      <ul className="dropdown-menu">
+                        {each.child.map((subItem) => (
+                          <li key={subItem.name}>
+                            <Link href={subItem.url}>
+                              <span>{subItem.name}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </li>
                 ))}
-                <li>
-                  <a
-                    href="#about-us"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateToSection("about-us");
-                    }}
-                  >
-                    About Us
-                  </a>
-                </li>
                 <li>
                   <a href="#contact">Contact Us</a>
                 </li>
@@ -128,6 +101,29 @@ export default function Header() {
           </div>
         </div>
       </header>
+
+      <style jsx>{`
+        .has-children:hover .dropdown-menu {
+          display: block;
+        }
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: white;
+          padding: 0;
+          list-style: none;
+          box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown-menu li {
+          padding: 10px;
+          white-space: nowrap;
+        }
+        .dropdown-menu li:hover {
+          background: #f1f1f1;
+        }
+      `}</style>
     </>
   );
 }
