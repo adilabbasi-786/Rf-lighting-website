@@ -1,13 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import details from "../data.json";
 import Link from "next/link";
 
 export default function Header() {
   const [isClient, setIsClient] = useState(false);
   const [logoSrc, setLogoSrc] = useState("");
-  const router = useRouter();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   useEffect(() => {
