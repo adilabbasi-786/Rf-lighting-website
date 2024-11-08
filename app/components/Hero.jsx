@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [slidesPerView, setSlidesPerView] = useState(8); // default value for larger screens
+  const [slidesPerView, setSlidesPerView] = useState(6); // default value for larger screens
 
   useEffect(() => {
     // Set initial slides per view based on screen width
     const handleResize = () => {
-      setSlidesPerView(window.innerWidth < 700 ? 3 : 8);
+      setSlidesPerView(window.innerWidth < 700 ? 2 : 6);
     };
 
     handleResize(); // Set the initial value
@@ -62,7 +62,7 @@ export default function Hero() {
           slidesPerView={slidesPerView} // Using dynamic slidesPerView based on window width
           spaceBetween={20}
           className="mySwiper"
-          style={{ height: "100px" }}
+          style={{ height: "200px" }}
         >
           {[
             { productId: "1", image: "5w COB.jpg" },
